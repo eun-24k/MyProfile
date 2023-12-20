@@ -58,7 +58,8 @@
         android:text="로그인"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:focusable="false"/>
     <Button
         android:id="@+id/btn_signup"
         android:layout_width="match_parent"
@@ -66,7 +67,8 @@
         android:text="회원가입"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:focusable="false"/>
 
     <ImageView
         android:id="@+id/iv_sparta_character"

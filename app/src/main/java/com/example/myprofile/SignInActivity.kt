@@ -3,11 +3,9 @@ package com.example.myprofile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import java.util.regex.Pattern
 
 class SignInActivity : AppCompatActivity() {
@@ -58,53 +56,29 @@ class SignInActivity : AppCompatActivity() {
 
     fun validEditText() {
         // 아이디 영문 대소문자, 숫자, -, _ 입력 가능 (16자 이하)
-        if (Pattern.compile("/^[a-z0-9_-]{3,16}\$/").matcher(et_id.toString()).find()) {
-            if (Pattern.compile("/(?=(.*[0-9]))(?=.*[\\!@#\$%^&*()\\\\[\\]{}\\-_+=~`|:;\"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/").matcher(et_password.toString()).find()) {
-                buttonActivation()
-
-            } else {
-                Toast.makeText(this, "비밀번호를 다시 입력하세요.", Toast.LENGTH_SHORT).show()
-            }
-
-        } else Toast.makeText(this, "아이디를 다시 입력하세요.", Toast.LENGTH_SHORT).show()
-
-
+        var idFocus = validate("/^[a-z0-9_-]{3,16}\$/", et_id)
 
         // 최소 영소문자/영대문자/숫자/특수문자 포함해야 하고 최소 8글자여야함.
+        var passwordFocus = validate("/(?=(.*[0-9]))(?=.*[\\!@#\$%^&*()\\\\[\\]{}\\-_+=~`|:;\"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/",et_password)
 
-
-        et_id.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                btn_signup.isEnabled = et_id.text.isNotEmpty() && et_password.text.isNotEmpty()
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-            }
-        })
-        et_password.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                btn_signup.isEnabled = et_id.text.isNotEmpty() && et_password.text.isNotEmpty()
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-            }
-        })
+        if (idFocus == true && passwordFocus == true) {
+            btn_login.hasFocus()
+            buttonActivation()
+        }
     }
 
-
+    fun validate(regex: String, editText: EditText):Boolean {
+        return Pattern.compile(regex).matcher(editText.toString()).find()
+    }
 
     fun buttonActivation() {
-        loginButton()
+
+        btn_login.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                loginButton()
+            }
+        }
+
         signupButton()
 
     }
@@ -112,7 +86,6 @@ class SignInActivity : AppCompatActivity() {
     fun loginButton() {
         btn_login.setOnClickListener {
             val intent = Intent(this@SignInActivity, HomeActivity::class.java)
-            intent.putExtra("et_id", et_id.text.toString())
             startActivity(intent)
 
         }
