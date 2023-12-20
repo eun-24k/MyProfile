@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import java.util.regex.Pattern
 
-class SignInActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity(), Validation {
 
     // 위젯 및 뷰 선언
 
@@ -67,9 +67,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    fun validate(regex: String, editText: EditText):Boolean {
-        return Pattern.compile(regex).matcher(editText.toString()).find()
-    }
+
 
     fun buttonActivation() {
 
