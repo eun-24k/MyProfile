@@ -28,7 +28,7 @@
             android:id="@+id/type_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이름을 입력해주세요"
+            android:text="@string/empty_name_message"
             android:textColor="@color/red"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -83,7 +83,7 @@
             android:id="@+id/type_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이메일을 입력해주세요"
+            android:text="@string/empty_email_message"
             android:textColor="@color/red"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -112,7 +112,7 @@
             android:id="@+id/type_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="비밀번호를 입력해주세요"
+            android:text="@string/empty_password_message"
             android:textColor="@color/red"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -141,7 +141,7 @@
             android:id="@+id/type_password2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="다시 비밀번호를 입력해주세요"
+            android:text="@string/password_check_error_message"
             android:textColor="@color/red"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

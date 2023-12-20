@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import java.util.regex.Pattern
 
-class SignInActivity : AppCompatActivity(), Validation {
+class SignInActivity : AppCompatActivity(), EditTextValidation {
 
     // 위젯 및 뷰 선언
 
@@ -56,10 +55,10 @@ class SignInActivity : AppCompatActivity(), Validation {
 
     fun validEditText() {
         // 아이디 영문 대소문자, 숫자, -, _ 입력 가능 (16자 이하)
-        var idFocus = validate("/^[a-z0-9_-]{3,16}\$/", et_id)
+        var idFocus = validateText("/^[a-z0-9_-]{3,16}\$/", et_id)
 
         // 최소 영소문자/영대문자/숫자/특수문자 포함해야 하고 최소 8글자여야함.
-        var passwordFocus = validate("/(?=(.*[0-9]))(?=.*[\\!@#\$%^&*()\\\\[\\]{}\\-_+=~`|:;\"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/",et_password)
+        var passwordFocus = validateText("/(?=(.*[0-9]))(?=.*[\\!@#\$%^&*()\\\\[\\]{}\\-_+=~`|:;\"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/",et_password)
 
         if (idFocus == true && passwordFocus == true) {
             btn_login.hasFocus()
